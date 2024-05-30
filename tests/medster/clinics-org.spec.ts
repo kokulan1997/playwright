@@ -1,0 +1,32 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://uat.medster.app/login');
+  await page.getByPlaceholder('Enter your email').click();
+  await page.getByPlaceholder('Enter your email').fill('kokulan@3axislabs.com');
+  await page.getByPlaceholder('Enter your password').click();
+  await page.getByPlaceholder('Enter your password').fill('Password@123');
+  await page.getByRole('button', { name: 'Sign in' }).click();
+  await page.getByRole('link', { name: 'Clinics' }).click();
+  await page.getByRole('button', { name: 'Create Clinic' }).click();
+  await page.getByPlaceholder('Enter clinic name').click();
+  await page.getByPlaceholder('Enter clinic name').fill('Welcome to Home Clinic');
+  await page.getByPlaceholder('Enter your address').click();
+  await page.getByPlaceholder('Enter your address').fill('home land');
+  await page.locator('div:nth-child(32) > div:nth-child(3)').click();
+  await page.getByPlaceholder('Enter phone number').click();
+  await page.getByPlaceholder('Enter phone number').fill('+1 (456) 987-44474');
+  await page.getByRole('button', { name: 'Create', exact: true }).click();
+  await page.locator('#MTable-12').getByText('Edit').click();
+  await page.getByLabel('Clinic StatusActive').click();
+  await page.getByRole('button', { name: 'Confirm' }).click();
+  await page.getByRole('button', { name: 'Cancel' }).click();
+  await page.locator('#MTable-12').getByText('Edit').click();
+  await page.getByLabel('Clinic StatusDisabled').click();
+  await page.getByRole('button', { name: 'Confirm' }).click();
+  await page.getByRole('dialog').locator('div').filter({ hasText: 'Edit ClinicCancelSaveLast' }).nth(1).click();
+  await page.getByRole('button', { name: 'Cancel' }).click();
+  await page.getByRole('link', { name: 'Dashboard' }).click();
+  await page.getByRole('button', { name: 'Open user menu K' }).click();
+  await page.getByRole('link', { name: 'Sign out' }).click();
+});
